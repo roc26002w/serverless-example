@@ -1,4 +1,4 @@
-service: app
+service: demo-laravel-aws
 
 provider:
     name: aws
@@ -9,13 +9,25 @@ plugins:
     - ./vendor/bref/bref
 
 functions:
-    function:
-        handler: index.php
-        description: ''
+    website:
+        handler: public/index.php
+        timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
         layers:
-            - ${bref:layer.php-73}
+            - ${bref:layer.php-74-fpm}
+        events:
+            - http: 'ANY /'
+            - http: 'ANY /{proxy+}'
+    artisan:
+        handler: artisan
+        timeout: 120 # in seconds
+        layers:
+            - ${bref:layer.php-74} # PHP
+            - ${bref:layer.console} # The "console" layer
 
-# Exclude files from deployment
 package:
     exclude:
-        - 'tests/**'
+        - node_modules/**
+        - public/storage
+        - resources/assets/**
+        - storage/**
+        - tests/**
