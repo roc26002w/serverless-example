@@ -30,6 +30,16 @@ functions:
         layers:
             - ${bref:layer.php-74} # PHP
             - ${bref:layer.console} # The "console" layer
+        vpc:
+          securityGroupIds:
+            - sg-abe037ce
+          subnetIds:
+            - subnet-7893f542
+            - subnet-c5567e83
+            - subnet-e5c34ee9
+            - subnet-1671393e
+            - subnet-66d9d612
+            - subnet-11c6a674
 
 package:
     exclude:
