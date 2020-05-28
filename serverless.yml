@@ -4,6 +4,13 @@ provider:
     name: aws
     region: us-east-1
     runtime: provided
+    environment:
+        APP_ENV: dev
+        APP_DEBUG: true
+        LOG_CHANNEL: stderr
+        SESSION_DRIVER: cookie
+        VIEW_COMPILED_PATH: /tmp/storage/framework/views
+        APP_STORAGE: /tmp
 
 plugins:
     - ./vendor/bref/bref
